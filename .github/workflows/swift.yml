@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Xcode Build tests
-      run: xcodebuild clean -project Ranker/Ranker.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=latest'
+      run: xcodebuild clean -project Ranker.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=latest'
