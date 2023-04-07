@@ -14,7 +14,8 @@
 		3B32C5D229CE01B4009D336F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B32C5D029CE01B4009D336F /* LaunchScreen.storyboard */; };
 		3B32C5E629D325A3009D336F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3B32C5E529D325A3009D336F /* SnapKit */; };
 		3B32C5E929D325B4009D336F /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 3B32C5E829D325B4009D336F /* Then */; };
-		3B352F3F29D45E5A00AB0EAF /* TrendViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B352F3E29D45E5A00AB0EAF /* TrendViewCell.swift */; };
+		3B352F3F29D45E5A00AB0EAF /* TrendViewKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B352F3E29D45E5A00AB0EAF /* TrendViewKeywordCell.swift */; };
+		3BB39D0029DFF6D90050CA76 /* TrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB39CFF29DFF6D90050CA76 /* TrendView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +27,8 @@
 		3B32C5D129CE01B4009D336F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B32C5D329CE01B4009D336F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B32C5D929CE0296009D336F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		3B352F3E29D45E5A00AB0EAF /* TrendViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewCell.swift; sourceTree = "<group>"; };
+		3B352F3E29D45E5A00AB0EAF /* TrendViewKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewKeywordCell.swift; sourceTree = "<group>"; };
+		3BB39CFF29DFF6D90050CA76 /* TrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				3B32C5C929CE01B3009D336F /* TrendViewController.swift */,
-				3B352F3E29D45E5A00AB0EAF /* TrendViewCell.swift */,
+				3BB39CFF29DFF6D90050CA76 /* TrendView.swift */,
+				3B352F3E29D45E5A00AB0EAF /* TrendViewKeywordCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,7 +187,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B32C5CA29CE01B3009D336F /* TrendViewController.swift in Sources */,
-				3B352F3F29D45E5A00AB0EAF /* TrendViewCell.swift in Sources */,
+				3B352F3F29D45E5A00AB0EAF /* TrendViewKeywordCell.swift in Sources */,
+				3BB39D0029DFF6D90050CA76 /* TrendView.swift in Sources */,
 				3B32C5C629CE01B3009D336F /* AppDelegate.swift in Sources */,
 				3B32C5C829CE01B3009D336F /* SceneDelegate.swift in Sources */,
 			);
