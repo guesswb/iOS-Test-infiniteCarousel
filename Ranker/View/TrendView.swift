@@ -12,8 +12,10 @@ import Then
 
 final class TrendView: UIView {
     
-    let testData = ["1111", "2222", "3333", "4444", "5555", "6666", "7777", "8888", "9999", "0000"]
-    var previewIndex = 10
+    let testData = ["9", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1", "2"]
+    
+    let firstOffsetX = (KeywordCell.width + KeywordCell.lineSpacing) * 2
+    let lastOffsetX = (KeywordCell.width + KeywordCell.lineSpacing) * 11
     
     enum KeywordCell {
         static let cellIdentifier = "trendViewCell"
@@ -100,11 +102,7 @@ extension TrendView: UICollectionViewDataSource {
             return TrendViewKeywordCell()
         }
         
-        cell.wordLabel.text = testData[indexPath[1] % 10]
-        
-        if indexPath[1] == 10 {
-            cell.transformToLarge()
-        }
+        cell.wordLabel.text = testData[indexPath.row]
         
         return cell
     }
@@ -112,41 +110,19 @@ extension TrendView: UICollectionViewDataSource {
 
 extension TrendView: UICollectionViewDelegateFlowLayout {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let scrolledOffsetX = targetContentOffset.pointee.x + scrollView.contentInset.left
         let cellWidth = KeywordCell.width + KeywordCell.lineSpacing
-        let index = round(scrolledOffsetX / cellWidth)
-        targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
+        let currentOffset = scrollView.contentOffset.x
+        let targetOffset = targetContentOffset.pointee.x
+        let newTargetOffset: CGFloat = targetOffset > currentOffset ? ceil(currentOffset / cellWidth) * cellWidth : floor(currentOffset / cellWidth) * cellWidth
+        
+        targetContentOffset.pointee = CGPoint(x: newTargetOffset, y: targetContentOffset.pointee.y)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        transformCell()
-    }
-    
-    func transformCell() {
-        let centerPoint = CGPoint(x: collectionView.frame.size.width / 2 + collectionView.contentOffset.x,
-                                  y: collectionView.frame.size.height / 2 + collectionView.contentOffset.y)
-        
-        guard let indexPath = collectionView.indexPathForItem(at: centerPoint),
-              let cell = collectionView.cellForItem(at: indexPath) as? TrendViewKeywordCell else { return }
-        
-        cell.transformToLarge()
-        
-        if previewIndex != indexPath.item {
-            let previewIndexPath = IndexPath(item: previewIndex, section: 0)
-            guard let previewCell = collectionView.cellForItem(at: previewIndexPath) as? TrendViewKeywordCell else { return }
-            previewCell.transformToStandard()
-            previewIndex = indexPath.item
-        }
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let firstX = (KeywordCell.width + KeywordCell.lineSpacing) * 10
-        let lastX = (KeywordCell.width + KeywordCell.lineSpacing) * 19
-        
-        if scrollView.contentOffset.x < firstX {
-            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x + 3200, y: scrollView.contentOffset.y), animated: false)
-        } else if scrollView.contentOffset.x > lastX {
-            scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x - 3200, y: scrollView.contentOffset.y), animated: false)
+        if scrollView.contentOffset.x <= firstOffsetX - 320 {
+            scrollView.setContentOffset(CGPoint(x: lastOffsetX, y: scrollView.contentOffset.y), animated: false)
+        } else if scrollView.contentOffset.x >= lastOffsetX + 320 {
+            scrollView.setContentOffset(CGPoint(x: firstOffsetX, y: scrollView.contentOffset.y), animated: false)
         }
     }
         

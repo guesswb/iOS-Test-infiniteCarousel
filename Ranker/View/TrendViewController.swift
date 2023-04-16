@@ -18,11 +18,10 @@ final class TrendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        trendView.collectionView.setContentOffset(CGPoint(x: 3200, y: trendView.collectionView.contentOffset.y), animated: false)
+        trendView.collectionView.setContentOffset(CGPoint(x: 640, y: trendView.collectionView.contentOffset.y), animated: false)
     }
 }
