@@ -14,9 +14,6 @@ final class TrendView: UIView {
     
     let testData = ["9", "10", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "1", "2"]
     
-    let firstOffsetX = (KeywordCell.width + KeywordCell.lineSpacing) * 2
-    let lastOffsetX = (KeywordCell.width + KeywordCell.lineSpacing) * 11
-    
     enum KeywordCell {
         static let cellIdentifier = "trendViewCell"
         static let width = 300.0
@@ -36,20 +33,15 @@ final class TrendView: UIView {
             $0.showsHorizontalScrollIndicator = false
             $0.backgroundColor = .systemBackground
             $0.decelerationRate = .fast
+            $0.delegate = self
+            $0.dataSource = self
             $0.register(TrendViewKeywordCell.self, forCellWithReuseIdentifier: KeywordCell.cellIdentifier)
         }
-    
-    let domainSelectButton: UIButton = UIButton().then {
-        $0.setTitle("구글", for: .normal)
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         configureUI()
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
     }
     
     required init?(coder: NSCoder) {
@@ -67,7 +59,6 @@ extension TrendView {
     
     private func addViews() {
         self.addSubview(collectionView)
-        self.addSubview(domainSelectButton)
     }
     
     private func configureLayout() {
@@ -76,25 +67,19 @@ extension TrendView {
             $0.centerY.equalToSuperview()
             $0.height.equalTo(400)
         }
-        
-        domainSelectButton.snp.makeConstraints {
-            $0.top.equalTo(collectionView.snp.bottom)
-        }
     }
 }
 
 extension TrendView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: cell 선택시 뒤집기
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? TrendViewKeywordCell else { return }
-//        cell.isReversed.toggle()
-//        print(cell.isReversed)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? TrendViewKeywordCell else { return }
+        cell.buttonClicked()
     }
 }
 
 extension TrendView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return testData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -102,7 +87,9 @@ extension TrendView: UICollectionViewDataSource {
             return TrendViewKeywordCell()
         }
         
-        cell.wordLabel.text = testData[indexPath.row]
+        cell.titleLabel.text = testData[indexPath.row]
+        cell.subLabel.text = testData[indexPath.row]
+        cell.layer.cornerRadius = 40
         
         return cell
     }
@@ -119,6 +106,9 @@ extension TrendView: UICollectionViewDelegateFlowLayout {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let firstOffsetX = (KeywordCell.width + KeywordCell.lineSpacing) * 2
+        let lastOffsetX = (KeywordCell.width + KeywordCell.lineSpacing) * (Double(testData.count) - 3)
+        
         if scrollView.contentOffset.x <= firstOffsetX - 320 {
             scrollView.setContentOffset(CGPoint(x: lastOffsetX, y: scrollView.contentOffset.y), animated: false)
         } else if scrollView.contentOffset.x >= lastOffsetX + 320 {
