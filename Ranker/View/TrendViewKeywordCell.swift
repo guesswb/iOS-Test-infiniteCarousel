@@ -12,13 +12,27 @@ import Then
 
 final class TrendViewKeywordCell: UICollectionViewCell {
     
-    var wordLabel: UILabel = UILabel().then {
+    var titleLabel: UILabel = UILabel().then {
         $0.textAlignment = .center
+        $0.font = .systemFont(ofSize: 30)
+    }
+    
+    var subLabel: UILabel = UILabel().then {
+        $0.textAlignment = .center
+    }
+    
+    private let checkContentLabel: UILabel = UILabel().then {
+        $0.text = "관련 뉴스 >"
+    }
+    
+    var contentLabel: UILabel = UILabel().then {
+        $0.numberOfLines = 7
+        $0.isHidden = true
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         configureUI()
         configureLayout()
     }
@@ -37,12 +51,31 @@ extension TrendViewKeywordCell {
     }
     
     private func addViews() {
-        addSubview(wordLabel)
+        addSubview(titleLabel)
+        addSubview(subLabel)
+        addSubview(checkContentLabel)
+        addSubview(contentLabel)
     }
     
     private func configureLayout() {
-        wordLabel.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview()
+        titleLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().multipliedBy(0.4)
+        }
+        
+        subLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().multipliedBy(0.6)
+        }
+        
+        checkContentLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().multipliedBy(0.9)
+        }
+        
+        contentLabel.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.9)
         }
     }
     
@@ -58,13 +91,12 @@ extension TrendViewKeywordCell {
         }
     }
     
-//    private func buttonClicked() {
-//           if isReversed {
-//               isReversed = false
-//               UIView.transition(with: UIView(), duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
-//           } else {
-//               isReversed = true
-//               UIView.transition(with: UIView(), duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
-//           }
-//       }
+    func buttonClicked() {
+        titleLabel.isHidden.toggle()
+        subLabel.isHidden.toggle()
+        checkContentLabel.isHidden.toggle()
+        contentLabel.isHidden.toggle()
+        
+        UIView.transition(with: self, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+    }
 }
