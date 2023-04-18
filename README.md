@@ -1,2 +1,2 @@
-#  Ranker
+#  infinite carousel
 
