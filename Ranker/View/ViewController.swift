@@ -1,5 +1,5 @@
 //
-//  TrendViewController.swift
+//  ViewController.swift
 //  Ranker
 //
 //  Created by 김기훈 on 2023/03/28.
@@ -7,12 +7,11 @@
 
 import UIKit
 
-final class TrendViewController: UIViewController {
+final class ViewController: UIViewController {
     
-    private var trendView: TrendView!
+    private var trendView: CollectionView = CollectionView()
     
     override func loadView() {
-        trendView = TrendView()
         view = trendView
     }
     

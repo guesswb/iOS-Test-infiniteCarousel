@@ -1,5 +1,5 @@
 //
-//  TrendViewResultCell.swift
+//  CollectionViewCell.swift
 //  Ranker
 //
 //  Created by 김기훈 on 2023/03/29.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class TrendViewKeywordCell: UICollectionViewCell {
+final class CollectionViewCell: UICollectionViewCell {
     
     var titleLabel: UILabel = UILabel().then {
         $0.textAlignment = .center
@@ -42,7 +42,7 @@ final class TrendViewKeywordCell: UICollectionViewCell {
     }
 }
 
-extension TrendViewKeywordCell {
+extension CollectionViewCell {
     private func configureUI() {
         backgroundColor = .brown
         
